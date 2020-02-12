@@ -4,22 +4,24 @@ import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="row">
+    <div className="col-3">
+        <div className="card mb-3" style={{"maxWidth": "540px"}}>
+            <div className="row no-gutters">
+                <div className="col-md-4">
+                    <img src="an.png" className="card-img" alt="..."/>
+                </div>
+                <div className="col-md-8">
+                    <div className="card-body">
+                        <h5 className="card-title">Accesories</h5>
+                        <a href="#" className="btn btn-primary">Add</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    </div>
+   
   );
 }
 
