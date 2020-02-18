@@ -30,7 +30,8 @@ class App extends React.Component {
         this.state={
             firstState: 'hello world',
             cartCount: 0 ,
-            products : []
+            products : [],
+            cart : []
              
         
         }
@@ -39,11 +40,28 @@ class App extends React.Component {
 
 
     componentDidMount(){
-       this.loadProduct()
+        this.loadProduct()
+       fetch('https://my-json-server.typicode.com/shiyasvp92/sample_products/products',{
+           method: 'GET'
+       } )
+       .then((response) =>{
+           return response.json()
+       })
+       .then((data) =>{
+           console.log(data)
+           this.setState({
+               products: data
+           })
+       })
+       .catch((error) =>{
+           console.error(error)
+       })
+       this.initCart()
     }
     componentDidUpdate(PrevProps,preState){
       if(this.state.cartCount>=10)
        alert('10/more items added')
+       
     }
     
     addCount(){
@@ -59,9 +77,32 @@ loadProduct(){
         products: productsArray
     })
 }
+initCart(){
+    let myCart = localStorage.getItem('cart')
+    myCart = JSON.parse(myCart)
+    this.setState({
+        cart: myCart || []    
+
+})
+}
+addToCart(products){
+    const newCart = this.state.cart;
+    newCart.push(products);
+    localStorage.setItem('cart', JSON.stringify(newCart))
+    this.setState({
+        cart:newCart
+    }
+
+    )
+    console.log(products)
+}
+viewCart(){
+    console.log(this.state.cart)
+}
+
  render() {
      const productsList = this.state.products.map((products)=>{
-         return productTile(this.addCount.bind(this),products)
+         return productTile(this.addToCart.bind(this),products)
      })
      console.log(productsList)
     return (
@@ -73,7 +114,9 @@ loadProduct(){
     {this.state.firstState}
     
     <p align="right">
-    <button type="button" className="btn btn-warning">Cart{this.state.cartCount}</button>
+    <button type="button" className="btn btn-warning" onClick={()=>{
+        this.viewCart();
+    }}>Cart{this.state.cart.length}</button>
     </p>
     </nav>
             <div className="row">
