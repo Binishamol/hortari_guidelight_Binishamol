@@ -1,23 +1,45 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-<<<<<<< HEAD
 import { render } from '@testing-library/react';
+import productTile from './components/productTile.jsx';
+const productsArray=[
+    {
+        "id" : 1,
+        "title" : "oneplus 7",
+        "price" : "Rs.30000"
+            
+    },
+    {
+        "id" : 2,
+        "title" : "Vivo V9",
+        "price" : "Rs.20000"
+            
+    },
+    {
+        "id" : 3,
+        "title" : "Samsung A50",
+        "price" : "Rs.25000"
+            
+    }
+]
+
 class App extends React.Component {
     constructor(props){
         super(props);
         this.state={
             firstState: 'hello world',
-            cartCount: 0
+            cartCount: 0 ,
+            products : []
+             
+        
         }
     }
         
 
 
     componentDidMount(){
-        this.setState({
-            firstState: 'Welcome to our shop'
-        })
+       this.loadProduct()
     }
     componentDidUpdate(PrevProps,preState){
       if(this.state.cartCount>=10)
@@ -32,13 +54,21 @@ class App extends React.Component {
       })
       
     }
-
+loadProduct(){
+    this.setState({
+        products: productsArray
+    })
+}
  render() {
+     const productsList = this.state.products.map((products)=>{
+         return productTile(this.addCount.bind(this),products)
+     })
+     console.log(productsList)
     return (
    
         <div className="container">
           <nav className="navbar navbar-light" style={{"backgroundColor": "olive"}}>
-    
+          
     <img src="download.jpg." width="70" height="150" className="d-inline-block align-top" alt=""/>
     {this.state.firstState}
     
@@ -47,25 +77,7 @@ class App extends React.Component {
     </p>
     </nav>
             <div className="row">
-                <div className="col-3">
-                    <div className="card mb-3" style={{"maxWidth": "540px"}}>
-                        <div className="row no-gutters">
-                            <div className="col-md-4">
-                                <img src="1.jpg" className="card-img" alt="..."/>
-                            </div>
-                            <div className="col-md-8">
-                                <div className="card-body">
-                                    <h5 className="card-title">BOOKS</h5>
-                                    <button type="button" className="btn btn-primary btn-lg" onClick={() =>{
-                                      this.addCount()
-                                      
-                                    }
-
-                                    }>ADD</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                {productsList}
                 </div>
                 
             <p align="right">
@@ -75,7 +87,7 @@ class App extends React.Component {
 
                                     }>Checkout</button></p>
     
-    </div>
+    
     </div>
     
     
@@ -89,30 +101,4 @@ class App extends React.Component {
 }
 
 
-=======
-
-function App() {
-  return (
-    <div className="row">
-    <div className="col-3">
-        <div className="card mb-3" style={{"maxWidth": "540px"}}>
-            <div className="row no-gutters">
-                <div className="col-md-4">
-                    <img src="an.png" className="card-img" alt="..."/>
-                </div>
-                <div className="col-md-8">
-                    <div className="card-body">
-                        <h5 className="card-title">Accesories</h5>
-                        <a href="#" className="btn btn-primary">Add</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
-   
-  );
-}
-
->>>>>>> fbb2f84d091e48324c64df14ac8504636b1ce9f3
 export default App;
