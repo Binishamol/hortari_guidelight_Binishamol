@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
 import { render } from '@testing-library/react';
@@ -112,12 +113,14 @@ viewCart(){
           
     <img src="download.jpg." width="70" height="150" className="d-inline-block align-top" alt=""/>
     {this.state.firstState}
-    
+    <Link to="/cart">
     <p align="right">
+     
     <button type="button" className="btn btn-warning" onClick={()=>{
         this.viewCart();
     }}>Cart{this.state.cart.length}</button>
     </p>
+    </Link>
     </nav>
             <div className="row">
                 {productsList}

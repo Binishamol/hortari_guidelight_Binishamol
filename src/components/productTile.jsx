@@ -1,5 +1,5 @@
 import React from 'react';
-export default function productTile(addToCart,product){
+export default function productTile(addToCart,product,removeFromCart){
     return(
         
         <div className="col-3" key={product.id}>
@@ -12,12 +12,26 @@ export default function productTile(addToCart,product){
                         <div className="card-body">
     <h5 className="card-title">{product.title}</h5>
                             <h5>{product.price}</h5>
+                            {
+                                addToCart &&
+
                             <button type="button" className="btn btn-primary btn-lg" onClick={() =>{
                               addToCart(product)
-                              
+                            
                             }
 
                             }>ADD</button>
+                        }
+                            {
+                                removeFromCart &&
+
+                            <button type="button" className="btn btn-primary btn-lg" onClick={() =>{
+                              removeFromCart(product)
+                            
+                            }
+
+                            }>REMOVE</button>
+                        }
                         </div>
                     </div>
                 </div>
